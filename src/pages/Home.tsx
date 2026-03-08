@@ -31,7 +31,7 @@ function parseVlessEndpoints(keyValue: string): ParsedEndpoint[] {
         address: url.hostname,
         port: parseInt(url.port) || 443,
         label: url.hash?.replace("#", "") || url.hostname,
-        protocol: "VLESS",
+        protocol: "VLESS"
       }];
     }
   } catch {}
@@ -61,9 +61,9 @@ export default function Home() {
     if (!user) return;
     const load = async () => {
       const [subRes, keysRes] = await Promise.all([
-        supabase.rpc("get_subscription_status"),
-        supabase.from("vpn_keys").select("*").eq("user_id", user.id).eq("is_active", true),
-      ]);
+      supabase.rpc("get_subscription_status"),
+      supabase.from("vpn_keys").select("*").eq("user_id", user.id).eq("is_active", true)]
+      );
       if (subRes.data) {
         const sub = subRes.data as any;
         setHasSubscription(sub.active === true);
@@ -130,25 +130,25 @@ export default function Home() {
     <div className="min-h-screen bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto relative">
       <TopBar
         onOpenServers={() => setShowServers(true)}
-        onOpenSettings={() => setShowSettings(true)}
-      />
+        onOpenSettings={() => setShowSettings(true)} />
+      
 
-      <div className="flex-1 flex flex-col items-center px-4 sm:px-6 md:px-8 pb-6 gap-4 md:gap-5">
+      <div className="flex-1 flex flex-col items-center px-4 sm:px-6 md:px-8 pb-6 gap-4 md:gap-5 opacity-100">
         {/* Status Banner */}
         <StatusBanner
           isLoggedIn={!!user}
           hasSubscription={hasSubscription}
           hasKeys={hasKeys}
-          daysLeft={subDaysLeft}
-        />
+          daysLeft={subDaysLeft} />
+        
 
         {/* VPN Button */}
         <div className="py-4">
           <VpnButton
             isConnected={isConnected}
             isConnecting={isConnecting}
-            onToggle={toggleVpn}
-          />
+            onToggle={toggleVpn} />
+          
         </div>
 
         {/* Session Timer */}
@@ -167,23 +167,23 @@ export default function Home() {
         </div>
 
         {/* Selected server */}
-        {mode === "manual" && servers.length > 0 && (
-          <button
-            onClick={() => setShowServers(true)}
-            className="card-surface w-full p-3 flex items-center justify-between"
-          >
+        {mode === "manual" && servers.length > 0 &&
+        <button
+          onClick={() => setShowServers(true)}
+          className="card-surface w-full p-3 flex items-center justify-between">
+          
             <span className="text-sm text-foreground font-medium">
-              Сервер: {servers.find(s => s.id === selectedServer)?.label || "Не выбран"}
+              Сервер: {servers.find((s) => s.id === selectedServer)?.label || "Не выбран"}
             </span>
             <span className="text-xs text-muted-foreground">Изменить →</span>
           </button>
-        )}
+        }
 
         {/* VPN Settings button */}
         <button
           onClick={() => setShowVpnSettings(true)}
-          className="card-surface w-full p-3 text-sm text-muted-foreground text-left font-medium"
-        >
+          className="card-surface w-full p-3 text-sm text-muted-foreground text-left font-medium">
+          
           ⚙ VPN-настройки
         </button>
       </div>
@@ -194,16 +194,16 @@ export default function Home() {
         servers={servers}
         selectedServer={selectedServer}
         onSelect={setSelectedServer}
-        onClose={() => setShowServers(false)}
-      />
+        onClose={() => setShowServers(false)} />
+      
       <SettingsPanel
         isOpen={showSettings}
-        onClose={() => setShowSettings(false)}
-      />
+        onClose={() => setShowSettings(false)} />
+      
       <VpnSettings
         isOpen={showVpnSettings}
-        onClose={() => setShowVpnSettings(false)}
-      />
-    </div>
-  );
+        onClose={() => setShowVpnSettings(false)} />
+      
+    </div>);
+
 }
