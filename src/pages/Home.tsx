@@ -127,7 +127,7 @@ export default function Home() {
   }, [isConnected]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto relative">
+    <div className="min-h-screen bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto relative">
       <TopBar
         onOpenServers={() => setShowServers(true)}
         onOpenSettings={() => setShowSettings(true)}
