@@ -13,29 +13,17 @@ export default function VpnButton({ isConnected, isConnecting, onToggle }: VpnBu
       <motion.button
         onClick={onToggle}
         disabled={isConnecting}
-        className={`relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-500 ${
+        className={`relative w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 ${
           isConnected ? "vpn-button-active" : "vpn-button-idle"
         }`}
         whileTap={{ scale: 0.92 }}
         animate={isConnecting ? { scale: [1, 1.05, 1] } : {}}
         transition={isConnecting ? { repeat: Infinity, duration: 1 } : {}}
       >
-        {/* Outer glow ring */}
-        <motion.div
-          className="absolute inset-[-6px] rounded-full border-2"
-          style={{
-            borderColor: isConnected
-              ? "hsl(190 100% 50% / 0.3)"
-              : "hsl(32 100% 50% / 0.2)",
-          }}
-          animate={isConnected ? { scale: [1, 1.08, 1], opacity: [0.5, 1, 0.5] } : {}}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        />
-
         {isConnected ? (
-          <Pause className="w-8 h-8 text-foreground" />
+          <Pause className="w-9 h-9 text-primary-foreground" />
         ) : (
-          <Power className="w-8 h-8 text-foreground" />
+          <Power className="w-9 h-9 text-primary-foreground" />
         )}
       </motion.button>
 
@@ -48,8 +36,8 @@ export default function VpnButton({ isConnected, isConnecting, onToggle }: VpnBu
         {isConnecting
           ? "Подключение..."
           : isConnected
-          ? "Отключить VPN"
-          : "Подключить VPN"}
+          ? "Отключить"
+          : "Подключить"}
       </motion.p>
     </div>
   );
