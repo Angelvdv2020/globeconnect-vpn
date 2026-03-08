@@ -3,6 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { Shield, Mail, Lock, User, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +12,14 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  // If already logged in, redirect
+  if (user) {
+    navigate("/dashboard", { replace: true });
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +30,7 @@ export default function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Вход выполнен!");
+        navigate("/");
       } else {
         const { error } = await supabase.auth.signUp({
           email,
@@ -46,9 +57,8 @@ export default function Auth() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
             <Shield className="w-8 h-8 text-primary" />
           </div>
           <h1 className="text-2xl font-bold text-foreground">VPN Guard</h1>
@@ -57,10 +67,9 @@ export default function Auth() {
           </p>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           {!isLogin && (
-            <div className="glass-card flex items-center gap-3 px-4 py-3">
+            <div className="card-surface flex items-center gap-3 px-4 py-3">
               <User className="w-5 h-5 text-muted-foreground shrink-0" />
               <input
                 type="text"
@@ -72,7 +81,7 @@ export default function Auth() {
             </div>
           )}
 
-          <div className="glass-card flex items-center gap-3 px-4 py-3">
+          <div className="card-surface flex items-center gap-3 px-4 py-3">
             <Mail className="w-5 h-5 text-muted-foreground shrink-0" />
             <input
               type="email"
@@ -84,7 +93,7 @@ export default function Auth() {
             />
           </div>
 
-          <div className="glass-card flex items-center gap-3 px-4 py-3">
+          <div className="card-surface flex items-center gap-3 px-4 py-3">
             <Lock className="w-5 h-5 text-muted-foreground shrink-0" />
             <input
               type="password"
@@ -100,7 +109,7 @@ export default function Auth() {
           <motion.button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 glow-primary disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
             whileTap={{ scale: 0.97 }}
           >
             {loading ? "Загрузка..." : isLogin ? "Войти" : "Зарегистрироваться"}
@@ -108,7 +117,6 @@ export default function Auth() {
           </motion.button>
         </form>
 
-        {/* Toggle */}
         <p className="text-center text-sm text-muted-foreground mt-6">
           {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}{" "}
           <button
