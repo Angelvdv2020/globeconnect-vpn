@@ -120,7 +120,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto">
+    <div className="min-h-screen bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto">
       {/* Header */}
       <div className="flex items-center gap-3 px-4 py-4 border-b border-border bg-card">
         <button onClick={() => navigate("/")} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
