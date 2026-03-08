@@ -50,14 +50,15 @@ export default function Dashboard() {
   const handleImportKey = async () => {
     if (!importKey.trim()) return;
     const keyType = importKey.startsWith("vless://") ? "vless" : "subscription";
-    const { error } = await supabase.from("vpn_keys").insert({
-      user_id: user!.id,
-      key_value: importKey.trim(),
-      key_type: keyType,
-      label: keyType === "vless" ? "VLESS ключ" : "Subscription URL",
+    const { data, error } = await supabase.rpc("import_vpn_key", {
+      _key_value: importKey.trim(),
+      _key_type: keyType,
+      _label: keyType === "vless" ? "VLESS ключ" : "Subscription URL",
     });
     if (error) {
       toast.error("Ошибка импорта: " + error.message);
+    } else if (data && typeof data === "object" && "error" in (data as any)) {
+      toast.error((data as any).message || "Требуется активная подписка");
     } else {
       toast.success("Ключ импортирован!");
       setImportKey("");
