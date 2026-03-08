@@ -14,7 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          balance: number
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          max_devices: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          max_devices?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          max_devices?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          plan: string
+          started_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          plan?: string
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          plan?: string
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_devices: {
+        Row: {
+          created_at: string
+          device_model: string | null
+          device_os: string | null
+          hwid: string
+          id: string
+          is_active: boolean
+          last_seen_at: string
+          os_version: string | null
+          updated_at: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          device_model?: string | null
+          device_os?: string | null
+          hwid: string
+          id?: string
+          is_active?: boolean
+          last_seen_at?: string
+          os_version?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          device_model?: string | null
+          device_os?: string | null
+          hwid?: string
+          id?: string
+          is_active?: boolean
+          last_seen_at?: string
+          os_version?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vpn_keys: {
+        Row: {
+          created_at: string
+          endpoints: Json | null
+          id: string
+          imported_at: string
+          is_active: boolean
+          key_type: string
+          key_value: string
+          label: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          endpoints?: Json | null
+          id?: string
+          imported_at?: string
+          is_active?: boolean
+          key_type?: string
+          key_value: string
+          label?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          endpoints?: Json | null
+          id?: string
+          imported_at?: string
+          is_active?: boolean
+          key_type?: string
+          key_value?: string
+          label?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
