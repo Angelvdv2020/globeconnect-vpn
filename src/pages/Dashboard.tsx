@@ -156,7 +156,7 @@ export default function Dashboard() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 pb-6 space-y-3">
+      <div className="flex-1 px-4 sm:px-6 md:px-8 pb-6 space-y-3">
         {activeTab === "overview" && (
           <motion.div className="space-y-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Balance */}

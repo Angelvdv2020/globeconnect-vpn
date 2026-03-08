@@ -9,7 +9,7 @@ interface SpeedIndicatorProps {
 
 export default function SpeedIndicator({ isConnected, upload, download }: SpeedIndicatorProps) {
   return (
-    <div className="card-surface flex items-center justify-center gap-6 px-6 py-3 w-full">
+    <div className="card-surface flex items-center justify-center gap-6 sm:gap-8 px-6 sm:px-8 py-3 sm:py-4 w-full">
       <div className="flex items-center gap-2">
         <ArrowUp className="w-4 h-4 text-accent" />
         <div>

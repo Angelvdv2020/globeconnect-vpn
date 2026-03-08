@@ -13,7 +13,7 @@ export default function VpnButton({ isConnected, isConnecting, onToggle }: VpnBu
       <motion.button
         onClick={onToggle}
         disabled={isConnecting}
-        className={`relative w-24 h-24 rounded-full flex items-center justify-center transition-all duration-500 ${
+        className={`relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full flex items-center justify-center transition-all duration-500 ${
           isConnected ? "vpn-button-active" : "vpn-button-idle"
         }`}
         whileTap={{ scale: 0.92 }}

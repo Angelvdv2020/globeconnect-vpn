@@ -5,7 +5,7 @@ interface ModeSwitchProps {
 
 export default function ModeSwitch({ mode, onModeChange }: ModeSwitchProps) {
   return (
-    <div className="flex rounded-xl bg-secondary p-1 w-full max-w-[280px] mx-auto">
+    <div className="flex rounded-xl bg-secondary p-1 w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] mx-auto">
       <button
         className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${
           mode === "auto" ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"

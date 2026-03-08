@@ -133,7 +133,7 @@ export default function Home() {
         onOpenSettings={() => setShowSettings(true)}
       />
 
-      <div className="flex-1 flex flex-col items-center px-4 pb-6 gap-4">
+      <div className="flex-1 flex flex-col items-center px-4 sm:px-6 md:px-8 pb-6 gap-4 md:gap-5">
         {/* Status Banner */}
         <StatusBanner
           isLoggedIn={!!user}

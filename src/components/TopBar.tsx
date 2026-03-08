@@ -7,7 +7,7 @@ interface TopBarProps {
 
 export default function TopBar({ onOpenServers, onOpenSettings }: TopBarProps) {
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-card">
+    <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-b border-border bg-card">
       <button
         onClick={onOpenServers}
         className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center"
