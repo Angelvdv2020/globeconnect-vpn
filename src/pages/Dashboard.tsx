@@ -80,7 +80,7 @@ export default function Dashboard() {
   };
 
   const handleResetDevices = async () => {
-    await supabase.from("user_devices").delete().eq("user_id", user!.id);
+    await supabase.rpc("reset_user_devices");
     toast.success("Все устройства сброшены");
     loadData();
   };
