@@ -1,17 +1,24 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Globe, MessageCircle, Download, LogOut } from "lucide-react";
+import { ArrowLeft, Globe, MessageCircle, Download, LogOut, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SettingsPanelProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const menuItems = [
-  { icon: Globe, label: "Сайт", href: "#" },
-  { icon: MessageCircle, label: "Поддержка Telegram", href: "#" },
-  { icon: Download, label: "Скачать приложение", href: "#" },
-  { icon: LogOut, label: "Выход", href: "#", destructive: true },
-];
+export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const menuItems = [
+    { icon: User, label: "Личный кабинет", action: () => { onClose(); navigate("/dashboard"); } },
+    { icon: Globe, label: "Сайт", href: "#" },
+    { icon: MessageCircle, label: "Поддержка Telegram", href: "#" },
+    { icon: Download, label: "Скачать приложение", href: "#" },
+    ...(user ? [{ icon: LogOut, label: "Выход", action: async () => { await signOut(); onClose(); }, destructive: true }] : []),
+  ];
 
 export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
   return (
