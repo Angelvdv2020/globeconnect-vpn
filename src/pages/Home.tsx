@@ -127,13 +127,13 @@ export default function Home() {
   }, [isConnected]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto relative">
+    <div className="min-h-screen bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto relative">
       <TopBar
         onOpenServers={() => setShowServers(true)}
         onOpenSettings={() => setShowSettings(true)}
       />
 
-      <div className="flex-1 flex flex-col items-center px-4 pb-6 gap-4">
+      <div className="flex-1 flex flex-col items-center px-4 sm:px-6 md:px-8 pb-6 gap-4 md:gap-5">
         {/* Status Banner */}
         <StatusBanner
           isLoggedIn={!!user}

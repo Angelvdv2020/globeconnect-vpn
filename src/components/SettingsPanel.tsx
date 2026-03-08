@@ -27,7 +27,7 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 bg-background flex flex-col max-w-md mx-auto"
+          className="fixed inset-0 z-50 bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto"
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}

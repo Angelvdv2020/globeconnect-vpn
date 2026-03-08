@@ -120,9 +120,9 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto">
+    <div className="min-h-screen bg-background flex flex-col w-full max-w-md sm:max-w-lg md:max-w-xl mx-auto">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-4 border-b border-border bg-card">
+      <div className="flex items-center gap-3 px-4 sm:px-6 md:px-8 py-4 border-b border-border bg-card">
         <button onClick={() => navigate("/")} className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
@@ -136,7 +136,7 @@ export default function Dashboard() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 px-4 py-3">
+      <div className="flex gap-1 px-4 sm:px-6 md:px-8 py-3">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isTabActive = activeTab === tab.id;
@@ -156,7 +156,7 @@ export default function Dashboard() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 px-4 pb-6 space-y-3">
+      <div className="flex-1 px-4 sm:px-6 md:px-8 pb-6 space-y-3">
         {activeTab === "overview" && (
           <motion.div className="space-y-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             {/* Balance */}

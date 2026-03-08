@@ -14,7 +14,7 @@ interface ScenarioCardsProps {
 
 export default function ScenarioCards({ active, onSelect }: ScenarioCardsProps) {
   return (
-    <div className="grid grid-cols-4 gap-2 w-full">
+    <div className="grid grid-cols-4 gap-2 sm:gap-3 w-full">
       {scenarios.map((s) => {
         const Icon = s.icon;
         const isActive = active === s.id;
