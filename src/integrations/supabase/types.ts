@@ -166,7 +166,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_device_count: { Args: { _user_id: string }; Returns: number }
+      get_max_devices: { Args: { _user_id: string }; Returns: number }
+      get_subscription_status: { Args: never; Returns: Json }
+      has_active_subscription: { Args: { _user_id: string }; Returns: boolean }
+      import_vpn_key: {
+        Args: { _key_type?: string; _key_value: string; _label?: string }
+        Returns: Json
+      }
+      register_device: {
+        Args: {
+          _device_model?: string
+          _device_os?: string
+          _hwid: string
+          _os_version?: string
+          _user_agent?: string
+        }
+        Returns: Json
+      }
+      reset_user_devices: { Args: never; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
