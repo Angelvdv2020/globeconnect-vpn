@@ -136,7 +136,7 @@ export default function Dashboard() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 px-4 py-3">
+      <div className="flex gap-1 px-4 sm:px-6 md:px-8 py-3">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isTabActive = activeTab === tab.id;
