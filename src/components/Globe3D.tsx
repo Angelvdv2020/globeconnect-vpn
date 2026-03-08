@@ -8,7 +8,7 @@ interface GlobeSceneProps {
 }
 
 function GlobeMesh({ isConnected }: GlobeSceneProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const glowRef = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
