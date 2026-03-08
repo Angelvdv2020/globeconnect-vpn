@@ -1,1 +1,4 @@
 project_id = "jiotehuacyhtcjnnkmvq"
+
+[functions.vpn-api]
+verify_jwt = false
