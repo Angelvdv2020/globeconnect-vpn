@@ -12,9 +12,9 @@ function GlobeMesh({ isConnected }: GlobeSceneProps) {
   const glowRef = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
-    if (meshRef.current) {
+    if (groupRef.current) {
       const speed = isConnected ? 0.15 : 0.02;
-      meshRef.current.rotation.y += delta * speed;
+      groupRef.current.rotation.y += delta * speed;
     }
     if (glowRef.current) {
       glowRef.current.rotation.y += delta * 0.1;
