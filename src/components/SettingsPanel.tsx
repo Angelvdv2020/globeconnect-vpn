@@ -1,19 +1,25 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Globe, MessageCircle, Download, LogOut } from "lucide-react";
+import { ArrowLeft, Globe, MessageCircle, Download, LogOut, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SettingsPanelProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const menuItems = [
-  { icon: Globe, label: "Сайт", href: "#" },
-  { icon: MessageCircle, label: "Поддержка Telegram", href: "#" },
-  { icon: Download, label: "Скачать приложение", href: "#" },
-  { icon: LogOut, label: "Выход", href: "#", destructive: true },
-];
-
 export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const menuItems = [
+    { icon: User, label: "Личный кабинет", action: () => { onClose(); navigate("/dashboard"); } },
+    { icon: Globe, label: "Сайт", href: "#" },
+    { icon: MessageCircle, label: "Поддержка Telegram", href: "#" },
+    { icon: Download, label: "Скачать приложение", href: "#" },
+    ...(user ? [{ icon: LogOut, label: "Выход", action: async () => { await signOut(); onClose(); }, destructive: true as const }] : []),
+  ];
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -34,23 +40,27 @@ export default function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
           <div className="flex-1 px-4 py-4 space-y-2">
             {menuItems.map((item, i) => {
               const Icon = item.icon;
+              const isDestructive = "destructive" in item && item.destructive;
               return (
-                <motion.a
+                <motion.button
                   key={item.label}
-                  href={item.href}
-                  className={`glass-card flex items-center gap-3 p-4 transition-all ${
-                    item.destructive ? "border-destructive/20" : ""
+                  onClick={() => {
+                    if ("action" in item && item.action) item.action();
+                    else if ("href" in item && item.href) window.open(item.href, "_blank");
+                  }}
+                  className={`glass-card w-full flex items-center gap-3 p-4 transition-all text-left ${
+                    isDestructive ? "border-destructive/20" : ""
                   }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Icon className={`w-5 h-5 ${item.destructive ? "text-destructive" : "text-muted-foreground"}`} />
-                  <span className={`font-medium ${item.destructive ? "text-destructive" : "text-foreground"}`}>
+                  <Icon className={`w-5 h-5 ${isDestructive ? "text-destructive" : "text-muted-foreground"}`} />
+                  <span className={`font-medium ${isDestructive ? "text-destructive" : "text-foreground"}`}>
                     {item.label}
                   </span>
-                </motion.a>
+                </motion.button>
               );
             })}
           </div>
