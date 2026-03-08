@@ -79,7 +79,7 @@ function GlobeMesh({ isConnected }: GlobeSceneProps) {
   const lineColor = isConnected ? activeColor : idleColor;
 
   return (
-    <group ref={meshRef}>
+    <group ref={groupRef}>
       {/* Core sphere */}
       <Sphere args={[1.75, 32, 32]}>
         <meshPhongMaterial
